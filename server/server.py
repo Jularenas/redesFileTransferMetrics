@@ -1,6 +1,6 @@
 import socket 	                  								  # Import socket module
 import hashlib
-
+import datetime
 
 port = 8080                    								  # Reserve a port for your service.
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)             # Create a socket object
@@ -18,6 +18,8 @@ while True:
     msg='Hello Client'
     conn.send(msg.encode('utf-8'))
     data=conn.recv(1024)
+    msg=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    conn.send(msg.encode('utf-8'))
     print('Server received',repr(data))
     hasher=hashlib.md5()
     with open(filename,'rb') as afile:
