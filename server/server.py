@@ -9,20 +9,21 @@ s.bind((host, port))            								  # Bind to the port
 s.listen(5)                     								  # Now wait for client connection.
 
 print ('Server listening....')
-
+filename='mytext.txt'
 while True:
     conn, addr = s.accept()     # Establish connection with client.
     print ('Got connection from', addr)
     data = conn.recv(1024)
     print('Server received', repr(data))
+    msg='Hello Client'
+    conn.send(msg.encode('utf-8'))
+    data=conn.recv(1024)
+    print('Server received',repr(data))
     hasher=hashlib.md5()
-    filename='mytext.txt'
     with open(filename,'rb') as afile:
         buf=afile.read()
         hasher.update(buf)
     hashval=hasher.hexdigest()+'\r\n'
-    hasheado="valor del hash"
-    conn.send(hasheado.encode('utf-8'))
     conn.send(hashval.encode('utf-8'))
     f = open(filename,'rb')
     l = f.read(1024)
@@ -31,8 +32,7 @@ while True:
        print('Sent ',repr(l))
        l = f.read(1024)
     f.close()
-
     print('Done sending')
-    msg='Thank you for connecting'
-    conn.send(msg.encode('utf-8'))
+    #msg='Thank you for connecting'
+    #conn.send(msg.encode('utf-8'))
     conn.close()
