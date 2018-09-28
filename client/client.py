@@ -1,12 +1,13 @@
 # client.py
 import datetime
 import hashlib
+import os
 import socket                   # Import socket module
 
 s = socket.socket()             # Create a socket object
 host = socket.gethostname()     # Get local machine name
 port = 8080                    # Reserve a port for your service.
-
+filename='received_file.txt'
 s.connect((host, port))
 msg="Hello server!"
 s.send(msg.encode('utf-8'))
@@ -14,7 +15,7 @@ hasher=hashlib.md5()
 filehash=0
 timeend=0
 timestamp=0
-with open('received_file.txt', 'wb') as f:
+with open(filename, 'wb') as f:
     print(s.recv(1024))
     msg="Ready to recieve"
     s.send(msg.encode('utf-8'))
@@ -58,3 +59,9 @@ else:
     s.send(msg.encode('utf-8'))	
 s.close()
 print('connection closed')
+
+
+
+with open('report.txt', 'wb') as f:
+    f.write(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S").encode('utf-8'))
+    f.write(filename.encode('utf-8'))
