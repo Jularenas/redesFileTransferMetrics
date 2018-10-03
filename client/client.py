@@ -1,4 +1,5 @@
 # client.py
+import time
 import datetime
 import hashlib
 import os
@@ -22,12 +23,12 @@ with open(filename, 'wb') as f:
     print ('file opened')
     timestamp=s.recv(1024)
     print('timeStart'+timestamp.decode('utf-8')+'\n')
-    hashing=s.recv(1024).decode('utf-8')
-    print('el hashing es'+hashing)
+    hashing=s.recv(32).decode('utf-8')
+    print('el hashing es '+hashing)
     while True:
         print('receiving data..	.')
         data = s.recv(1024)
-        print('data=%s', (data))
+        print(data)
         if not data:
             break
         # write data to a file
@@ -39,14 +40,22 @@ with open(filename, 'wb') as f:
 f.close()
 timeend=datetime.datetime.now()
 
-with open('received_file.txt','rb') as afile:
+with open(filename, 'r') as fin:
+    data = fin.read().splitlines(True)
+with open(filename, 'w') as fout:
+    fout.writelines(data[1:])
+with open(filename,'rb') as afile:
         buf=afile.read()
         hasher.update(buf)
 hashval=hasher.hexdigest()
 print(str(hashval).strip())
 print(str(hashing).strip())
+<<<<<<< HEAD
 timeDone=0
 status=0
+=======
+print(str(hashval).strip()==str(hashing).strip())
+>>>>>>> 09281cb1c7f0239532c7bc5a7fe7c4e12bd8e0ee
 if str(hashval).strip()==str(hashing).strip():
     print('Successfully get the file')
     start=datetime.datetime.strptime(timestamp.decode('utf-8'),"%Y-%m-%d %H:%M:%S")

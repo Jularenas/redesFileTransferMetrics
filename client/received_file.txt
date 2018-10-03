@@ -3,4 +3,12 @@ Soy,
 Un,
 Archivo,
 De,
+<<<<<<< HEAD
 250MiB
+=======
+250MiB
+aaaa
+aaaa
+aaa
+aaa
+>>>>>>> 09281cb1c7f0239532c7bc5a7fe7c4e12bd8e0ee

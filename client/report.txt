@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 2018-10-03 13:03:40received_file.txt
+=======
+2018-10-03 16:19:18received_file.txt
+>>>>>>> 09281cb1c7f0239532c7bc5a7fe7c4e12bd8e0ee
