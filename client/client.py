@@ -5,7 +5,7 @@ import os
 import socket                   # Import socket module
 
 s = socket.socket()             # Create a socket object
-host = socket.gethostname()     # Get local machine name
+host = '157.253.202.20'     # Get local machine name
 port = 8080                    # Reserve a port for your service.
 filename='received_file.txt'
 s.connect((host, port))

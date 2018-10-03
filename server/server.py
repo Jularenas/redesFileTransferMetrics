@@ -2,6 +2,7 @@ import socket 	                  								  # Import socket module
 import hashlib
 import datetime
 import threading
+file= input("elija el archivo (1) 250 MiB(2) 500 MiB	")
 outer_lock = threading.Lock()     
 condition = threading.Condition()
 n=2																  #Number of clients
@@ -12,8 +13,13 @@ port = 8080                    								  	  # Reserve a port for your service.
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)             # Create a socket object
 host = socket.gethostname()     								  # Get local machine name
 s.bind((host, port))            								  # Bind to the port
-s.listen(5)                     								  # Now wait for client connection.
-
+s.listen(5)   
+filename=0                  								  # Now wait for client connection.
+print ('Server listening....')
+if(file==1):
+     filename='250.txt'
+else:
+     filename='500.txt'	 
 class myThread (threading.Thread):
    def __init__(self, threadID,conn,condition,lock):
       threading.Thread.__init__(self)
@@ -57,8 +63,7 @@ class myThread (threading.Thread):
       #conn.send(msg.encode('utf-8'))
       conn.close()
 
-print ('Server listening....')
-filename='visible.txt'
+
 while True:
     conn, addr = s.accept()     # Establish connection with client.
     print ('Got connection from', addr)
