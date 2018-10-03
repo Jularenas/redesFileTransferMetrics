@@ -1,12 +1,5 @@
-<<<<<<< HEAD
 500.txt 
-2018-10-03 17:24:01
+2018-10-03 18:06:20
 received_file.txt
 Status:OK
-=======
-<<<<<<< HEAD
-2018-10-03 13:03:40received_file.txt
-=======
-2018-10-03 16:19:18received_file.txt
->>>>>>> 09281cb1c7f0239532c7bc5a7fe7c4e12bd8e0ee
->>>>>>> df0ab13ef1d795ca2152ca9bccce6da3ce4d274a
+450.522914

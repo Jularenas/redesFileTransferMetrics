@@ -1,4 +1,5 @@
 # client.py
+import math
 import time
 import datetime
 import hashlib
@@ -28,7 +29,6 @@ with open(filename, 'wb') as f:
     while True:
         print('receiving data..	.')
         data = s.recv(1024)
-        print(data)
         if not data:
             break
         # write data to a file
@@ -61,7 +61,7 @@ if str(hashval).strip()==str(hashing).strip():
     print(start)
     print(timeend)
     print((timeend-start).total_seconds())
-    timeSent=(timeend-start).total_seconds()
+    timeSent=abs((timeend-start).total_seconds())
     msg='Status:OK'
     status=msg
     s.send(msg.encode('utf-8'))
@@ -75,9 +75,10 @@ print('connection closed')
 
 
 
-with open('report.txt', 'wb') as f:
+with open('report1_1.txt', 'wb') as f:
     f.write('500.txt \n'.encode('utf-8'))
     f.write((datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")+'\n').encode('utf-8'))
     f.write((filename+'\n').encode('utf-8'))
     f.write((status+'\n').encode('utf-8'))
-    f.write(str(timeSent+'\n').encode('utf-8'))
+    f.write(str(os.path.getsize(filename)).encode('utf-8'))
+    f.write((str(timeSent)+'\n').encode('utf-8'))
