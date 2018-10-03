@@ -5,7 +5,7 @@ import threading
 file= input("elija el archivo (1) 250 MiB(2) 500 MiB	")
 outer_lock = threading.Lock()     
 condition = threading.Condition()
-n=2																  #Number of clients
+n=1																  #Number of clients
 id=0															  #IdForThread
 ready=0															  #ThreadsReadyToSend
 threadList=[]													  #ThreadList
@@ -41,7 +41,8 @@ class myThread (threading.Thread):
          if(ready==n):
              self.condition.notifyAll()
          else:
-             self.condition.wait()	  
+             self.condition.wait()
+      ready=0			 
       msg=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
       conn.send(msg.encode('utf-8'))
       print('Server received',repr(data))
