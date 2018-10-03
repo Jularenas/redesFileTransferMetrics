@@ -1,1 +1,4 @@
-2018-10-03 16:19:18received_file.txt
+500.txt 
+2018-10-03 17:24:01
+received_file.txt
+Status:OK

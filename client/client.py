@@ -32,7 +32,7 @@ with open(filename, 'wb') as f:
         if not data:
             break
         # write data to a file
-        if(data.decode('utf-8')=='Thank you for connecting'):
+        if(data=='Thank you for connecting'):
             print(done)
         else:			
             f.write(data)
@@ -48,20 +48,25 @@ with open(filename,'rb') as afile:
         buf=afile.read()
         hasher.update(buf)
 hashval=hasher.hexdigest()
+status=0
 print(str(hashval).strip())
 print(str(hashing).strip())
 print(str(hashval).strip()==str(hashing).strip())
+timeSent=0
 if str(hashval).strip()==str(hashing).strip():
     print('Successfully get the file')
     start=datetime.datetime.strptime(timestamp.decode('utf-8'),"%Y-%m-%d %H:%M:%S")
     print(start)
     print(timeend)
     print((timeend-start).total_seconds())
+    timeSent=(timeend-start).total_seconds()
     msg='Status:OK'
+    status=msg
     s.send(msg.encode('utf-8'))
 else:
     print('hash error file not complete')
     msg='Status: File Not Complete'
+    status=msg
     s.send(msg.encode('utf-8'))	
 s.close()
 print('connection closed')
@@ -69,5 +74,8 @@ print('connection closed')
 
 
 with open('report.txt', 'wb') as f:
-    f.write(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S").encode('utf-8'))
-    f.write(filename.encode('utf-8'))
+    f.write('500.txt \n'.encode('utf-8'))
+    f.write((datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")+'\n').encode('utf-8'))
+    f.write((filename+'\n').encode('utf-8'))
+    f.write((status+'\n').encode('utf-8'))
+    f.write(str(timeSent+'\n').encode('utf-8'))
