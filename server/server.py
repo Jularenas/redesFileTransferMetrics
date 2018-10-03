@@ -5,13 +5,13 @@ import threading
 file= input("elija el archivo (1) 250 MiB(2) 500 MiB	")
 outer_lock = threading.Lock()     
 condition = threading.Condition()
-n=2																  #Number of clients
+n=1																  #Number of clients
 id=0															  #IdForThread
 ready=0															  #ThreadsReadyToSend
 threadList=[]													  #ThreadList
 port = 8080                    								  	  # Reserve a port for your service.
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)             # Create a socket object
-host = socket.gethostname()     								  # Get local machine name
+host = '0.0.0.0'     								  # Get local machine name
 s.bind((host, port))            								  # Bind to the port
 s.listen(5)   
 filename=0                  								  # Now wait for client connection.
@@ -41,7 +41,8 @@ class myThread (threading.Thread):
          if(ready==n):
              self.condition.notifyAll()
          else:
-             self.condition.wait()	  
+             self.condition.wait()
+      ready=0			 
       msg=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
       conn.send(msg.encode('utf-8'))
       print('Server received',repr(data))

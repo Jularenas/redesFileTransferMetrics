@@ -51,8 +51,10 @@ hashval=hasher.hexdigest()
 status=0
 print(str(hashval).strip())
 print(str(hashing).strip())
+status=0
 print(str(hashval).strip()==str(hashing).strip())
 timeSent=0
+
 if str(hashval).strip()==str(hashing).strip():
     print('Successfully get the file')
     start=datetime.datetime.strptime(timestamp.decode('utf-8'),"%Y-%m-%d %H:%M:%S")
