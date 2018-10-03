@@ -11,7 +11,7 @@ ready=0															  #ThreadsReadyToSend
 threadList=[]													  #ThreadList
 port = 8080                    								  	  # Reserve a port for your service.
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)             # Create a socket object
-host = socket.gethostname()     								  # Get local machine name
+host = '0.0.0.0'     								  # Get local machine name
 s.bind((host, port))            								  # Bind to the port
 s.listen(5)   
 filename=0                  								  # Now wait for client connection.
